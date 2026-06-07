@@ -1,4 +1,12 @@
-import { FaGithub, FaLinkedin, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaExternalLinkAlt,
+  FaMoon,
+  FaSun,
+} from 'react-icons/fa'
 import { projects } from './data/projects'
 import './App.css'
 
@@ -20,18 +28,42 @@ const experience = [
 ]
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'dark'
+    const stored = window.localStorage.getItem('theme')
+    if (stored === 'light' || stored === 'dark') return stored
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  })
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.dataset.theme = theme
+    window.localStorage.setItem('theme', theme)
+  }, [theme])
+
   return (
     <div className="app-shell">
       <header className="topbar">
         <a className="brand" href="#hero">
           Simon Preece
         </a>
-        <nav className="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div className="topbar-actions">
+          <nav className="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          >
+            {theme === 'dark' ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+            <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
+          </button>
+        </div>
       </header>
 
       <main>
