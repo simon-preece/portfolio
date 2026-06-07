@@ -4,6 +4,7 @@
   flex-direction: column;
   background: var(--bg);
   color: var(--text);
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 .topbar {
@@ -17,6 +18,7 @@
   background: var(--surface);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .topbar-actions {
@@ -60,7 +62,7 @@
   color: var(--text);
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.35s ease, color 0.35s ease;
 }
 
 .theme-toggle:hover {
@@ -80,7 +82,8 @@ main {
 
 .section {
   padding: 48px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.35s ease;
 }
 
 .section:last-of-type {
@@ -98,14 +101,14 @@ main {
   font-size: 0.85rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #7b83a6;
+  color: var(--muted);
 }
 
 h1,
 h2,
 h3 {
   margin: 0;
-  color: #ffffff;
+  color: var(--text);
 }
 
 h1 {
@@ -128,7 +131,7 @@ ul {
 }
 
 p {
-  color: #c8cee8;
+  color: var(--text-secondary);
   line-height: 1.75;
 }
 
@@ -146,7 +149,7 @@ p {
 
 .eyebrow {
   margin-bottom: 20px;
-  color: #7b83a6;
+  color: var(--muted);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -172,7 +175,7 @@ p {
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .button:hover {
@@ -186,9 +189,14 @@ p {
 }
 
 .button.secondary {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--surface-hover);
   color: var(--text);
   border: 1px solid var(--border);
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.button.secondary:hover {
+  background: var(--surface-strong);
 }
 
 .hero-stats {
@@ -201,6 +209,7 @@ p {
   border: 1px solid var(--border);
   border-radius: 24px;
   background: var(--surface);
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 }
 
 .hero-stats strong {
@@ -210,7 +219,7 @@ p {
 }
 
 .hero-stats span {
-  color: #9ca0c1;
+  color: var(--muted);
 }
 
 .about-section,
@@ -230,7 +239,7 @@ p {
   display: grid;
   gap: 12px;
   padding-left: 18px;
-  color: #c8cee8;
+  color: var(--text-secondary);
 }
 
 .about-grid li {
@@ -258,6 +267,11 @@ p {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
 }
 
 .project-card-top {
@@ -278,10 +292,15 @@ p {
   gap: 10px;
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.project-card-top a:hover {
+  color: var(--primary-strong);
 }
 
 .project-card p {
-  color: #c8cee8;
+  color: var(--text-secondary);
 }
 
 .tags {
@@ -309,13 +328,18 @@ p {
   border-radius: 24px;
   background: var(--surface);
   border: 1px solid var(--border);
+  transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.25s ease;
+}
+
+.experience-card:hover {
+  transform: translateY(-2px);
 }
 
 .experience-meta {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  color: #7b83a6;
+  color: var(--muted);
   margin-bottom: 14px;
   font-size: 0.95rem;
 }
@@ -351,7 +375,7 @@ p {
 
 .contact-links a:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-hover);
 }
 
 .footer {
