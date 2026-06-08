@@ -8,24 +8,8 @@ import {
   FaSun,
 } from 'react-icons/fa'
 import { projects } from './data/projects'
+import { about, experience, hero, skills } from './data/siteContent'
 import './App.css'
-
-const experience = [
-  {
-    title: 'Frontend Engineer',
-    company: 'Creative Solutions Studio',
-    period: '2024 – Present',
-    summary:
-      'Leading web application development with modern React architecture, design systems, and polished user experiences.',
-  },
-  {
-    title: 'UI Developer',
-    company: 'Growth Marketing Agency',
-    period: '2022 – 2024',
-    summary:
-      'Built high-conversion landing pages, interactive dashboards, and reusable component libraries for digital campaigns.',
-  },
-]
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -41,6 +25,8 @@ function App() {
     window.localStorage.setItem('theme', theme)
   }, [theme])
 
+  const { eyebrow, greeting, description, primaryCta, secondaryCta, stats } = hero
+
   return (
     <div className="app-shell">
       <header className="topbar">
@@ -50,6 +36,7 @@ function App() {
         <div className="topbar-actions">
           <nav className="nav-links">
             <a href="#about">About</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
@@ -69,60 +56,60 @@ function App() {
       <main>
         <section id="hero" className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">Software engineer · interface design · React</p>
-            <h1>Hi, I’m Simon.</h1>
-            <p>
-              I create dependable web products and polished user experiences for
-              startups, personal brands, and digital teams. My work blends
-              design-driven thinking with strong technical implementation.
-            </p>
+            <p className="eyebrow">{eyebrow}</p>
+            <h1>{greeting}</h1>
+            <p>{description}</p>
             <div className="hero-actions">
-              <a className="button primary" href="#projects">
-                View Projects
+              <a className="button primary" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
-              <a className="button secondary" href="#contact">
-                Let’s Talk
+              <a className="button secondary" href={secondaryCta.href}>
+                {secondaryCta.label}
               </a>
             </div>
           </div>
           <div className="hero-stats">
-            <div>
-              <strong>5+</strong>
-              <span>years crafting interfaces</span>
-            </div>
-            <div>
-              <strong>20+</strong>
-              <span>web projects delivered</span>
-            </div>
-            <div>
-              <strong>React & TypeScript</strong>
-              <span>preferred stack</span>
-            </div>
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
           </div>
         </section>
 
         <section id="about" className="section about-section">
           <div className="section-header">
-            <p className="section-label">About me</p>
-            <h2>Professional approach and strengths</h2>
+            <p className="section-label">{about.label}</p>
+            <h2>{about.title}</h2>
           </div>
           <div className="about-grid">
             <div>
-              <p>
-                I help teams move from concept to launch with clean, accessible
-                code and thoughtful product interaction. My focus is on building
-                performant interfaces that feel intuitive and scale with growth.
-              </p>
+              <p>{about.summary}</p>
             </div>
             <div>
               <h3>Core capabilities</h3>
               <ul>
-                <li>React application architecture and state management</li>
-                <li>Responsive layouts, animations, and micro-interactions</li>
-                <li>REST and GraphQL API integration</li>
-                <li>Design system implementation and component libraries</li>
+                {about.capabilities.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
+          </div>
+        </section>
+
+        <section id="skills" className="section skills-section">
+          <div className="section-header">
+            <p className="section-label">{skills.label}</p>
+            <h2>{skills.title}</h2>
+          </div>
+          <div className="skills-grid">
+            {skills.items.map((skill) => (
+              <article key={skill.title} className="skill-card">
+                <strong>{skill.title}</strong>
+                <p>{skill.description}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -204,7 +191,7 @@ function App() {
 
       <footer className="footer">
         <span>© 2026 Simon Preece</span>
-        <span>Built with React and Vite</span>
+        <span>Built with React and Vite - <a href="https://github.com/simon-preece/portfolio" target="_blank" rel="noreferrer">View Source</a></span>
       </footer>
     </div>
   )
